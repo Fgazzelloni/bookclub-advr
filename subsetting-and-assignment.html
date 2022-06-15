@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>1.3 Resources | Advanced R Book Club</title>
+  <title>4.3 Subsetting and Assignment | Advanced R Book Club</title>
   <meta name="description" content="This is the product of the R4DS Online Learning Community’s Advanced R Book Club." />
   <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="1.3 Resources | Advanced R Book Club" />
+  <meta property="og:title" content="4.3 Subsetting and Assignment | Advanced R Book Club" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is the product of the R4DS Online Learning Community’s Advanced R Book Club." />
   <meta name="github-repo" content="r4ds/bookclub-advr" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="1.3 Resources | Advanced R Book Club" />
+  <meta name="twitter:title" content="4.3 Subsetting and Assignment | Advanced R Book Club" />
   
   <meta name="twitter:description" content="This is the product of the R4DS Online Learning Community’s Advanced R Book Club." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="overview-of-the-book-structure.html"/>
-<link rel="next" href="meeting-videos.html"/>
+<link rel="prev" href="selecting-a-single-element.html"/>
+<link rel="next" href="applications.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -565,20 +565,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="resources" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> Resources<a href="resources.html#resources" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="subsetting-and-assignment" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Subsetting and Assignment<a href="subsetting-and-assignment.html#subsetting-and-assignment" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <ul>
-<li><a href="http://adv-r.had.co.nz">first edition</a></li>
-<li><a href="https://advanced-r-solutions.rbind.io/">advanced-r-solutions</a></li>
+<li>Subsetting can be combined with assignment to edit values</li>
 </ul>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="subsetting-and-assignment.html#cb52-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Tigers&quot;</span>, <span class="st">&quot;Royals&quot;</span>, <span class="st">&quot;White Sox&quot;</span>, <span class="st">&quot;Twins&quot;</span>, <span class="st">&quot;Indians&quot;</span>)</span>
+<span id="cb52-2"><a href="subsetting-and-assignment.html#cb52-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-3"><a href="subsetting-and-assignment.html#cb52-3" aria-hidden="true" tabindex="-1"></a>x[<span class="dv">5</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Guardians&quot;</span></span>
+<span id="cb52-4"><a href="subsetting-and-assignment.html#cb52-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb52-5"><a href="subsetting-and-assignment.html#cb52-5" aria-hidden="true" tabindex="-1"></a>x</span>
+<span id="cb52-6"><a href="subsetting-and-assignment.html#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Tigers&quot;    &quot;Royals&quot;    &quot;White Sox&quot; &quot;Twins&quot;     &quot;Guardians&quot;</span></span></code></pre></div>
+<ul>
+<li>length of the subset and assignment vector should be the same to avoid recycling</li>
+</ul>
+<p>You can use NULL to remove a component</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="subsetting-and-assignment.html#cb53-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">a =</span> <span class="dv">1</span>, <span class="at">b =</span> <span class="dv">2</span>)</span>
+<span id="cb53-2"><a href="subsetting-and-assignment.html#cb53-2" aria-hidden="true" tabindex="-1"></a>x[[<span class="st">&quot;b&quot;</span>]] <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb53-3"><a href="subsetting-and-assignment.html#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(x)</span>
+<span id="cb53-4"><a href="subsetting-and-assignment.html#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; List of 1</span></span>
+<span id="cb53-5"><a href="subsetting-and-assignment.html#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  $ a: num 1</span></span></code></pre></div>
+<p>Subsetting with nothing can preserve structure of original object</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="subsetting-and-assignment.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># mtcars[] &lt;- lapply(mtcars, as.integer)</span></span>
+<span id="cb54-2"><a href="subsetting-and-assignment.html#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="co"># is.data.frame(mtcars)</span></span>
+<span id="cb54-3"><a href="subsetting-and-assignment.html#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] TRUE</span></span>
+<span id="cb54-4"><a href="subsetting-and-assignment.html#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="co"># mtcars &lt;- lapply(mtcars, as.integer)</span></span>
+<span id="cb54-5"><a href="subsetting-and-assignment.html#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; is.data.frame(mtcars)</span></span>
+<span id="cb54-6"><a href="subsetting-and-assignment.html#cb54-6" aria-hidden="true" tabindex="-1"></a><span class="co"># [1] FALSE</span></span></code></pre></div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="overview-of-the-book-structure.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="meeting-videos.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="selecting-a-single-element.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="applications.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -609,7 +630,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/r4ds/bookclub-advr/edit/main/01_Introduction.Rmd",
+"link": "https://github.com/r4ds/bookclub-advr/edit/main/04_Subsetting.Rmd",
 "text": "Edit"
 },
 "history": {
